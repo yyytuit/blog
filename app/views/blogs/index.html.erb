@@ -1,0 +1,36 @@
+  <div class="contents row" >
+    <% @articles.each do |article| %>
+    <div class="col s12 m12">
+      <div class="card white">
+        <!-- <div class="card-content black-text"> -->
+    <%= simple_format(article.text) %>
+      <% if user_signed_in? && current_user.id == article.user_id %>
+        <div class="more">
+          <span><%= image_tag 'arrow_top.png' %></span>
+          <ul class="more_list">
+            <li>
+              <%= link_to '詳細', "/blogs/#{article.id}",class: 'btn btn-default', method: :get %>
+            </li>
+            <% if user_signed_in? && current_user.id == article.user_id %>
+            <li>
+              <%= link_to '編集', "/blogs/#{article.id}/edit",class: 'btn btn-default', method: :get %>
+            </li>
+            <li>
+              <%= link_to '削除', "/blogs/#{article.id}",class: 'btn btn-default', method: :delete %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+
+      <% end %>
+       </div>
+    </div>
+<% end %>
+  </div>
+
+
+
+
+
+
+
